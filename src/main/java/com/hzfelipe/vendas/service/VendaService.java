@@ -4,7 +4,6 @@ import com.hzfelipe.vendas.model.Venda;
 import com.hzfelipe.vendas.model.Vendedor;
 import com.hzfelipe.vendas.model.dto.VendaIn;
 import com.hzfelipe.vendas.model.dto.VendaOut;
-import com.hzfelipe.vendas.model.dto.VendedorOut;
 import com.hzfelipe.vendas.repository.VendaRepository;
 import com.hzfelipe.vendas.repository.VendedorRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +27,11 @@ public class VendaService {
         VendaOut vendaOut = null;
         try{Optional<Vendedor> vendedor = vendedorRepository.findById(vendaIn.getIdVendedor());
             String data = vendaIn.getData();
-            String valor = vendaIn.getValor();
+            Long valor = vendaIn.getValor();
             Venda venda = new Venda(null, vendedor.get(), vendedor.get().getNome(),data, valor);
             venda = vendaRepository.save(venda);
 
-            vendaOut = new VendaOut(venda.getIdVenda(), vendedor.get().getId(), vendedor.get().getNome(),data, valor);
+            vendaOut = new VendaOut(venda.getIdVenda(), vendedor.get().getId(), vendedor.get().getNome(),valor,data);
         } catch (NoSuchElementException exception){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
@@ -43,6 +42,8 @@ public class VendaService {
     public List<VendaOut> buscaVendasPorIdVendedor(Long idVendedor){
         List<Venda> vendaList = vendaRepository.findByIdVendedor(idVendedor);
         List<VendaOut> list = new ArrayList<>();
+        List<Long> media = new ArrayList<>();
+
 
          vendaList.forEach(vendas -> {
              VendaOut vendaOut = new VendaOut();
@@ -51,9 +52,32 @@ public class VendaService {
              vendaOut.setValor(vendas.getValor());
              vendaOut.setData(vendas.getData());
              vendaOut.setIdVenda(vendas.getIdVenda());
+             media.add(vendas.getValor());
              list.add(vendaOut);
          });
 
+
         return list;
+    }
+
+    public Long mediadeVendas(Long idVendedor) {
+        List<Venda> vendaList = vendaRepository.findByIdVendedor(idVendedor);
+        List<VendaOut> list = new ArrayList<>();
+        List<Long> media = new ArrayList<>();
+
+        vendaList.forEach(vendas -> {
+            VendaOut vendaOut = new VendaOut();
+            vendaOut.setValor(vendas.getValor());
+            media.add(vendas.getValor());
+        });
+
+        int n = media.size();
+        Long valor;
+        Long soma = 0l;
+        for (int i = 0; i<n; i++){
+            soma = media.get(i) + soma;
+        }
+        valor = soma/ media.size();
+        return valor;
     }
 }

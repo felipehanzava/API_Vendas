@@ -15,7 +15,7 @@ public class VendaOut {
     private Long idVenda;
     private Long idVendedor;
     private String nomeVendendor;
-    private String valor;
+    private Long valor;
     private String data;
 
 

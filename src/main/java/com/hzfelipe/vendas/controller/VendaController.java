@@ -28,4 +28,12 @@ public class VendaController {
     public List<VendaOut> buscaVendasPorIdVendedor(@PathVariable Long idVendedor){
         return vendaService.buscaVendasPorIdVendedor(idVendedor);
     }
+
+    @GetMapping("/mediadeVendas/{idVendedor}")
+    public Long mediadeVendas(@PathVariable Long idVendedor){
+        Long media;
+        media = vendaService.mediadeVendas(idVendedor);
+        return media;
+    }
+
 }

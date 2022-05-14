@@ -1,5 +1,6 @@
 package com.hzfelipe.vendas.model.dto;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
@@ -10,8 +11,8 @@ public class VendaIn {
     private Long idVendedor;
     @NotBlank
     private String data;
-    @NotBlank
-    private String valor;
+    @NotNull
+    private Long valor;
 
     public Long getIdVendedor() {
         return idVendedor;

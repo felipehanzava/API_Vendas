@@ -25,8 +25,8 @@ public class Venda {
     @NotBlank
     @DateTimeFormat
     private String data;
-    @NotBlank
-    private String valor;
+    @NotNull
+    private Long valor;
 
 
 }
