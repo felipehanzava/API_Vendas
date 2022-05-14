@@ -3,14 +3,14 @@ Criaçao de uma API que cadastra Vendedores e Vendas e retorna todas as vendas f
 
 
 **Objetivo
+
 Criar uma API usando Spring Boot.
 Utilizar um banco de dados em memória (HSQLDB ou H2) - Utilizado H2
 
-Teste:
 Desenvolver um serviço que seja capaz de gerar uma venda.
 Uma venda é composta por id, data da venda, valor, vendedor id e vendedor nome.
 
-Sua tarefa é desenvolver os serviços REST abaixo:
+Tarefas:
 - Criar uma nova venda
 - Retornar a lista de vendas de um vendedor
 
