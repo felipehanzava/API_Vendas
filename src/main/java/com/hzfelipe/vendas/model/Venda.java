@@ -22,9 +22,11 @@ public class Venda {
 
     @NotNull
     private String nomeVendededor;
+
     @NotBlank
     @DateTimeFormat
     private String data;
+
     @NotNull
     private Long valor;
 
